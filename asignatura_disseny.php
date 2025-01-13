@@ -14,17 +14,16 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Assignatures del Professor </title>
+    <title> Disseny </title>
     <link rel="stylesheet" href="lumiere2profe.css">
     <link rel="icon" href="img/logo_lumiere-removebg-preview.png" type="image/x-icon">
 </head>
-
 <body>
-    <div class="header">
+
+<div class="header">
         <div class="welcome-message">
             <p>Bienvenido, <?php echo $nombreProfesor; ?></p>
         </div>
@@ -34,24 +33,15 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
     </div>
 
     <div class="title-container">
-        <h1 class="tituloassignatures"> Assignatures del Professor </h1>
+        <h1 class="tituloassignatures"> Disseny </h1>
     </div>
+
 
     <br><br>
 
     <div class="imgprofe">
-        <img src="img/logo_lumiere-removebg-preview.png" alt="">
-    </div>
-
-    <br>
-
-    <!-- Menú de navegación -->
-    <div class="menu">
-        <button class="menu-btn" onclick="window.location.href='asignatura_php.php'"> PHP </button>
-        <button class="menu-btn" onclick="window.location.href='asignatura_js.php'"> Javascript </button>
-        <button class="menu-btn" onclick="window.location.href='asignatura_disseny.php'"> Disseny </button>
-        <button class="menu-btn" onclick="window.location.href='asignatura_empresa.php'"> Empresa </button>
-        <button class="menu-btn" onclick="window.location.href='asignatura_projecte.php'"> Projecte </button>
-    </div>
-
+        <img  src="img/logo_lumiere-removebg-preview.png" alt="">
+    </div>    
+    
 </body>
+</html>

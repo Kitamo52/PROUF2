@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Si encontramos el profesor en la base de datos, guardamos su nombre en la sesión
         session_start(); // Iniciar la sesión
         $_SESSION['nombre_profesor'] = $usuario; // Guardamos el nombre del profesor en la sesión
-        // Redirigimos al panel de control de profesores
+        // Redirigimos al panel de control de profesores    
             header("Location: lumiere2profe.php");
         } else {
             // Si no está en ninguna de las dos tablas
