@@ -36,6 +36,7 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
         <h1 class="tituloassignatures"> PHP </h1>
     </div>
     <!-- test marc -->
+     <!-- test 2 marc -->
     <br><br>
 
     <div class="imgprofe">
