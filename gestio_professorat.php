@@ -50,9 +50,7 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
             <br><br>
             <input type="text" id="email_estudiant" placeholder=" Correu Electrònic ">
             <br><br>
-            <input type="text" id="DNI_estudiant" placeholder=" (DNI) Document Nacional ">
-            <br><br>
-            <input type="text" id="Percentatge_estudiant" placeholder=" Percentatge ">
+            <input type="text" id="estat_estudiant" placeholder=" Estat Estudiant ">
             <br><br>
             <br><br>
 
@@ -78,6 +76,9 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
         <label for="hard-skills">Hard Skills</label>
         <br><br>
         <input type="text" id="Percentatge" placeholder=" Percentatge ">
+        <br><br>
+        <input type="text" id="Percentatge" placeholder=" Percentatge ">            
+
 
                 <br><br>
                 <br><br>
