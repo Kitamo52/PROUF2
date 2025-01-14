@@ -18,7 +18,7 @@ body {
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f0f0f0;
-    color: #333;
+    color: #e9c3c3;
     padding: 20px;
     background-image: url(img/wallpaper1.jpg);
 }
@@ -100,4 +100,18 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.columna {
+    display: flex; /* Activa Flexbox */
+    flex-direction: row; /* Organiza los hijos en fila */
+    justify-content: space-between; /* Coloca un elemento a la izquierda y otro a la derecha */
+    gap: 20px; /* Espacio opcional entre ellos */
+    margin-right: 200px;
+    margin-left: 200px;
+    margin-top: 100px;
+}
+
+.formgestionprofe{
+    margin-left: 100px;
 }
