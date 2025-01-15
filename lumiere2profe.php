@@ -39,7 +39,7 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
     </div>
 
     <div class="imgprofe">
-        <img  src="img/logo_lumiere-removebg-preview.png" alt="">
+        <img src="img/logo_lumiere-removebg-preview.png" alt="">
     </div>
 
     <!-- Menú de navegación -->

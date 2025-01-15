@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 /* 
 body {
     display: flex;
@@ -81,14 +82,13 @@ body {
     background-color: #1c3d63;
 }
 
-.tituloassignatures{
+.tituloassignatures {
     color: #ffffff;
     display: flex;
     justify-content: center;
-    margin-top: 40px;
 }
 
-.tituloraco{
+.tituloraco {
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -96,22 +96,71 @@ body {
     margin-bottom: 40px;
 }
 
-.imgprofe{
+.imgprofe {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .columna {
-    display: flex; /* Activa Flexbox */
-    flex-direction: row; /* Organiza los hijos en fila */
-    justify-content: space-between; /* Coloca un elemento a la izquierda y otro a la derecha */
-    gap: 20px; /* Espacio opcional entre ellos */
+    display: flex;
+    /* Activa Flexbox */
+    flex-direction: row;
+    /* Organiza los hijos en fila */
+    justify-content: space-between;
+    /* Coloca un elemento a la izquierda y otro a la derecha */
+    gap: 20px;
+    /* Espacio opcional entre ellos */
     margin-right: 200px;
     margin-left: 200px;
     margin-top: 100px;
 }
 
-.formgestionprofe{
+.formgestionprofe {
     margin-left: 100px;
+}
+
+/* Asegura que los elementos dentro de .logout-button tengan espacio entre ellos */
+.logout-button {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espacio entre la flecha y el botón de cerrar sesión */
+}
+
+/* Imagen de la flecha con margen y tamaño adecuado */
+.back-button {
+    margin-right: 20px; /* Separación con el botón "Cerrar sesión" */
+}
+
+.crearactivitat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px; /* Máximo ancho del formulario */
+    gap: 15px; /* Espacio entre los elementos dentro del formulario */
+}
+
+input {
+    padding: 10px;
+    margin: 5px 0; /* Añadimos margen entre los inputs */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espacio entre los botones */
+    width: 100%;
+    margin-top: 20px;
 }

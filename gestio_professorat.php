@@ -29,6 +29,7 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
             <p>Bienvenido, <?php echo $nombreProfesor; ?></p>
         </div>
         <div class="logout-button">
+            <img src="img/arrow-left.png" alt="Atrás" class="back-button" onclick="goBack()">
             <a href="lumiere1.php" class="btn">Cerrar sesión</a>
         </div>
     </div>
@@ -38,58 +39,66 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
     </div>
 
     <div class="columna">
-    <div>
-        <h1>Estudiants</h1>
-        <br><br>
-        <form class="formgestioprofe">
-            <input type="text" id="nom_estudiant" placeholder=" Ingresa el teu nom ">
+        <div>
+            <h1>Estudiants</h1>
             <br><br>
-            <input type="text" id="Cognom_estudiant" placeholder=" Ingresa primer cognom ">
-            <br><br>
-            <input type="password" id="contrasenya_estudiant" placeholder=" Contrasenya ">
-            <br><br>
-            <input type="text" id="email_estudiant" placeholder=" Correu Electrònic ">
-            <br><br>
-            <input type="text" id="estat_estudiant" placeholder=" Estat Estudiant ">
-            <br><br>
-            <br><br>
-
-            <button type="button" class="botonform" onclick=""> Crear Estudiant </button>
-            <button type="button" class="botonform" onclick=""> Modificar Estudiant </button>
-            <button type="button" class="botonform" onclick=""> Eliminar Estudiant </button>
-        </form>
-    </div>
-
-    <div>
-        <h1>Items</h1>
-        <br><br>
-        <form class="formgestioprofe">
-        <input type="text" id="nom" placeholder="Nom del ítem">
-        <br><br>
-
-        <label for="tipus">Tipus del ítem:</label>
-        <br>
-        <input type="radio" id="soft-skills" name="tipus" value="Soft Skills">
-        <label for="soft-skills">Soft Skills</label>
-        <br>
-        <input type="radio" id="hard-skills" name="tipus" value="Hard Skills">
-        <label for="hard-skills">Hard Skills</label>
-        <br><br>
-        <input type="text" id="Percentatge" placeholder=" Percentatge ">
-        <br><br>
-        <input type="text" id="Percentatge" placeholder=" Percentatge ">            
-
-
+            <form class="formgestioprofe">
+                <input type="text" id="nom_estudiant" placeholder=" Ingresa el teu nom ">
+                <br><br>
+                <input type="text" id="cognom_estudiant" placeholder=" Ingresa primer cognom ">
+                <br><br>
+                <input type="password" id="contrasenya_estudiant" placeholder=" Contrasenya ">
+                <br><br>
+                <input type="text" id="email_estudiant" placeholder=" Correu Electrònic ">
+                <br><br>
+                <input type="text" id="estat_estudiant" placeholder=" Estat Estudiant ">
                 <br><br>
                 <br><br>
 
-            <button type="button" class="botonform" onclick=""> Crear Item </button>
-            <button type="button" class="botonform" onclick=""> Modificar Item </button>
-            <button type="button" class="botonform" onclick=""> Eliminar Item </button>
-        </form>
-        
-    </div>
+                <button type="button" class="botonform" onclick=""> Crear Estudiant </button>
+                <button type="button" class="botonform" onclick=""> Modificar Estudiant </button>
+                <button type="button" class="botonform" onclick=""> Eliminar Estudiant </button>
+            </form>
+        </div>
+
+        <div>
+            <h1>Items</h1>
+            <br><br>
+            <form class="formgestioprofe">
+                <input type="text" id="nom" placeholder="Nom del ítem">
+                <br><br>
+
+                <label for="tipus">Tipus del ítem:</label>
+                <br>
+                <input type="radio" id="soft-skills" name="tipus" value="Soft Skills">
+                <label for="soft-skills">Soft Skills</label>
+                <br>
+                <input type="radio" id="hard-skills" name="tipus" value="Hard Skills">
+                <label for="hard-skills">Hard Skills</label>
+                <br><br>
+                <input type="text" id="percentatge" placeholder=" Percentatge ">
+                <br><br>
+                <input type="text" id="id_activitat" placeholder=" Id_Activitat ">
+                <br><br>
+
+
+                <br><br>
+
+
+                <button type="button" class="botonform" onclick=""> Crear Item </button>
+                <button type="button" class="botonform" onclick=""> Modificar Item </button>
+                <button type="button" class="botonform" onclick=""> Eliminar Item </button>
+            </form>
+
+        </div>
 
     </div>
+
+    <script>
+        // Función para ir a la página anterior
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 
 </body>

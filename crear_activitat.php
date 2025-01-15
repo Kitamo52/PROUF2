@@ -29,6 +29,7 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
             <p>Bienvenido, <?php echo $nombreProfesor; ?></p>
         </div>
         <div class="logout-button">
+            <img src="img/arrow-left.png" alt="Atrás" class="back-button" onclick="goBack()">
             <a href="lumiere1.php" class="btn">Cerrar sesión</a>
         </div>
     </div>
@@ -36,4 +37,32 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
     <div class="title-container">
         <h1 class="tituloassignatures"> Creació d'Activitats </h1>
     </div>
+
+<br><br>
+
+    <form class="crearactivitat">
+        <div class="form-container">
+            <input type="text" id="nom_activitat" placeholder="Nom de l'Activitat">
+            <br><br>
+            <input type="text" id="id_activitat" placeholder="ID de l'activitat">
+            <br><br>
+            <input type="datetime-local" id="data_inici">
+            <br><br>
+            <input type="datetime-local" id="data_final">
+            <br><br><br><br>
+
+            <div class="form-buttons">
+                <button type="button" class="botonform">Crear Estudiant</button>
+                <button type="button" class="botonform">Modificar Estudiant</button>
+                <button type="button" class="botonform">Eliminar Estudiant</button>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        // Función para ir a la página anterior
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </body>
