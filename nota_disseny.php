@@ -14,17 +14,16 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Panell d'Alumnes </title>
-    <link rel="stylesheet" href="lumiere2profe.css">
+    <title> Disseny </title>
+    <link rel="stylesheet" href="lumiere2alumno.css">
     <link rel="icon" href="img/logo_lumiere-removebg-preview.png" type="image/x-icon">
 </head>
-
 <body>
-    <div class="header">
+
+<div class="header">
         <div class="welcome-message">
             <p>Bienvenido, <?php echo $nombreProfesor; ?></p>
         </div>
@@ -35,29 +34,15 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
     </div>
 
     <div class="title-container">
-        <h1 class="tituloassignatures"> Creació d'Activitats </h1>
+        <h1 class="tituloassignatures"> Disseny </h1>
     </div>
 
-<br><br>
 
-    <form class="crearactivitat">
-        <div class="form-container">
-            <input type="text" id="nom_activitat" placeholder="Nom de l'Activitat">
-            <br><br>
-            <input type="text" id="id_activitat" placeholder="ID de l'activitat">
-            <br><br>
-            <input type="datetime-local" id="data_inici">
-            <br><br>
-            <input type="datetime-local" id="data_final">
-            <br><br><br><br>
+    <br><br>
 
-            <div class="form-buttons">
-                <button type="button" class="botonform">Crear Activitat</button>
-                <button type="button" class="botonform">Modificar Activitat</button>
-                <button type="button" class="botonform">Eliminar Activitat</button>
-            </div>
-        </div>
-    </form>
+    <div class="imgprofe">
+        <img  src="img/logo_lumiere-removebg-preview.png" alt="">
+    </div>    
 
     <script>
         // Función para ir a la página anterior
@@ -65,4 +50,6 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
             window.history.back();
         }
     </script>
+
 </body>
+</html>

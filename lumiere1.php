@@ -11,7 +11,7 @@ if (!$connexio) {
     die("Error de conexión: " . mysqli_connect_error());
 }
 
-$resultadologin =""; // creo aqui la variable porque si no da error al controlar el login
+$resultadologin = ""; // creo aqui la variable porque si no da error al controlar el login
 
 // Recibimos los datos del formulario HTML
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -24,23 +24,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Si encontramos un resultado en 'estudiant'
     if (mysqli_num_rows($resultEstudiant) > 0) {
-        // echo "¡Bienvenido, $usuario! Has ingresado como estudiante.<br>";
+        // Iniciar sesión
+        session_start();
+
+        // Guardar el nombre del estudiante en la sesión
+        $_SESSION['nombre_alumno'] = $usuario;
+
+        // Redirigir al panel de alumnos
         header("Location: lumiere2alumno.php");
+        exit; // Siempre es recomendable usar exit después de una redirección
     } else {
         // Si no está en 'estudiant', buscamos en la tabla 'professor'
         $sqlProfessor = "SELECT * FROM professor WHERE nom_professor = '$usuario' AND pw_professor = '$contrasena'";
         $resultProfessor = mysqli_query($connexio, $sqlProfessor);
 
         if (mysqli_num_rows($resultProfessor) > 0) {
-            // echo "¡Bienvenido, $usuario! Has ingresado como profesor.<br>";
-                    // Si encontramos el profesor en la base de datos, guardamos su nombre en la sesión
-        session_start(); // Iniciar la sesión
-        $_SESSION['nombre_profesor'] = $usuario; // Guardamos el nombre del profesor en la sesión
-        // Redirigimos al panel de control de profesores    
+            // Si encontramos el profesor en la base de datos, guardamos su nombre en la sesión
+            session_start(); // Iniciar la sesión
+            $_SESSION['nombre_profesor'] = $usuario; // Guardamos el nombre del profesor en la sesión
+
+            // Redirigir al panel de control de profesores
             header("Location: lumiere2profe.php");
+            exit;
         } else {
             // Si no está en ninguna de las dos tablas
-            $resultadologin = "  <span class='resultadologin'> Usuario y/o contraseña incorrectos. </span>";    
+            $resultadologin = "  <span class='resultadologin'> Usuario y/o contraseña incorrectos. </span>";
         }
     }
 }

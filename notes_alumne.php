@@ -1,15 +1,10 @@
 <?php
-// Configuración de la conexión a la base de datos
+// Conexión a la base de datos
 $servidor = "localhost";
 $usuari = "root";
 $clau = "";
 $bbdd = "micro2";
 $connexio = mysqli_connect($servidor, $usuari, $clau, $bbdd);
-
-// Verificar la conexión a la base de datos
-if (!$connexio) {
-    die("Error de conexión a la base de datos: " . mysqli_connect_error());
-}
 
 // Iniciar sesión
 session_start();
@@ -30,38 +25,48 @@ $nombreAlumno = $_SESSION['nombre_alumno'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panell d'Alumnes</title>
+    <title> Notes de Alumne </title>
     <link rel="stylesheet" href="lumiere2alumno.css">
     <link rel="icon" href="img/logo_lumiere-removebg-preview.png" type="image/x-icon">
 </head>
 
 <body>
-    <!-- Barra de navegación y bienvenida -->
     <div class="header">
         <div class="welcome-message">
-            <!-- Mostrar el nombre del alumno -->
-            <p>Bienvenido, <?php echo htmlspecialchars($nombreAlumno); ?></p>
+            <p>Bienvenido, <?php echo $nombreAlumno; ?></p>
         </div>
         <div class="logout-button">
+            <img src="img/arrow-left.png" alt="Atrás" class="back-button" onclick="goBack()">
             <a href="lumiere1.php" class="btn">Cerrar sesión</a>
         </div>
     </div>
 
     <div class="title-container">
-        <h1 class="tituloraco">Racó de l'Alumne</h1>
+        <h1 class="tituloassignatures"> Notes del Alumne </h1>
     </div>
+
+    <br><br>
 
     <div class="imgprofe">
         <img src="img/logo_lumiere-removebg-preview.png" alt="">
     </div>
 
+    <br>
+
     <!-- Menú de navegación -->
     <div class="menu">
-        <button class="menu-btn" onclick="window.location.href='notes_alumne.php'">Les Meves Notes</button>
-        <button class="menu-btn" onclick="window.location.href='gestio_professorat.php'">Notes Projecte</button>
-        <button class="menu-btn" onclick="window.location.href='crear_activitat.php'">Activitats en curs</button>
+        <button class="menu-btn" onclick="window.location.href='nota_php.php'"> PHP </button>
+        <button class="menu-btn" onclick="window.location.href='nota_js.php'"> Javascript </button>
+        <button class="menu-btn" onclick="window.location.href='nota_disseny.php'"> Disseny </button>
+        <button class="menu-btn" onclick="window.location.href='nota_empresa.php'"> Empresa </button>
+        <button class="menu-btn" onclick="window.location.href='notes_projecte_alumne.php'"> Projecte </button>
     </div>
 
-</body>
+    <script>
+        // Función para ir a la página anterior
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 
-</html>
+</body>
