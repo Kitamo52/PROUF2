@@ -29,12 +29,11 @@ $nombreAlumno = $_SESSION['nombre_alumno'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Empresa </title>
+    <title> Projecte </title>
     <link rel="stylesheet" href="lumiere2alumno.css">
     <link rel="icon" href="img/logo_lumiere-removebg-preview.png" type="image/x-icon">
 </head>
 <body>
-
 <div class="header">
         <div class="welcome-message">
             <p>Bienvenido, <?php echo $nombreAlumno; ?></p>
@@ -46,7 +45,7 @@ $nombreAlumno = $_SESSION['nombre_alumno'];
     </div>
 
     <div class="title-container">
-        <h1 class="tituloassignatures"> Empresa </h1>
+        <h1 class="tituloassignatures"> Activitats en Curs </h1>
     </div>
 
     
@@ -62,6 +61,6 @@ $nombreAlumno = $_SESSION['nombre_alumno'];
             window.history.back();
         }
     </script>
-
+    
 </body>
 </html>

@@ -58,8 +58,8 @@ $nombreAlumno = $_SESSION['nombre_alumno'];
     <!-- Menú de navegación -->
     <div class="menu">
         <button class="menu-btn" onclick="window.location.href='notes_alumne.php'">Les Meves Notes</button>
-        <button class="menu-btn" onclick="window.location.href='gestio_professorat.php'">Notes Projecte</button>
-        <button class="menu-btn" onclick="window.location.href='crear_activitat.php'">Activitats en curs</button>
+        <button class="menu-btn" onclick="window.location.href='notes_projecte_alumne.php'">Notes Projecte</button>
+        <button class="menu-btn" onclick="window.location.href='activitats_curs.php'">Activitats en curs</button>
     </div>
 
 </body>

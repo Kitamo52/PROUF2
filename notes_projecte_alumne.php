@@ -6,10 +6,22 @@ $clau = "";
 $bbdd = "micro2";
 $connexio = mysqli_connect($servidor, $usuari, $clau, $bbdd);
 
-// Verificar la sesión del usuario (nombre del profesor)
-// Supongamos que el nombre del profesor está almacenado en una variable de sesión llamada 'nombre_profesor'
+// Verificar la conexión a la base de datos
+if (!$connexio) {
+    die("Error de conexión a la base de datos: " . mysqli_connect_error());
+}
+
+// Iniciar sesión
 session_start();
-$nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay sesión, mostrar 'Desconocido'
+
+// Verificar si el nombre del alumno está disponible en la sesión
+if (!isset($_SESSION['nombre_alumno'])) {
+    // Si la sesión no tiene el nombre del alumno, redirigir al inicio de sesión o asignar un valor por defecto
+    $_SESSION['nombre_alumno'] = 'Desconocido'; // O podrías redirigir a una página de inicio
+}
+
+// Asignar el nombre del alumno
+$nombreAlumno = $_SESSION['nombre_alumno'];
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +36,7 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
 <body>
 <div class="header">
         <div class="welcome-message">
-            <p>Bienvenido, <?php echo $nombreProfesor; ?></p>
+            <p>Bienvenido, <?php echo $nombreAlumno; ?></p>
         </div>
         <div class="logout-button">
             <img src="img/arrow-left.png" alt="Atrás" class="back-button" onclick="goBack()">
@@ -33,7 +45,7 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
     </div>
 
     <div class="title-container">
-        <h1 class="tituloassignatures"> Projecte </h1>
+        <h1 class="tituloassignatures"> Notes del Projecte </h1>
     </div>
 
     
