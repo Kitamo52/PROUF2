@@ -21,6 +21,17 @@ if (!isset($_SESSION['nombre_alumno'])) {
 
 // Asignar el nombre del alumno
 $nombreAlumno = $_SESSION['nombre_alumno'];
+
+// Actualizar el estado de la actividad cuando se hace clic en "Entregar"
+if (isset($_POST['entregar_actividad'])) {
+    $id_actividad = $_POST['id_actividad'];
+    $query_update = "UPDATE activitat SET estat_activitat = 'entregat' WHERE id_activitat = '$id_actividad'";
+    if (mysqli_query($connexio, $query_update)) {
+        echo "<script>alert('Actividad entregada correctamente');</script>";
+    } else {
+        echo "<script>alert('Error al entregar la actividad');</script>";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -64,9 +75,13 @@ $nombreAlumno = $_SESSION['nombre_alumno'];
                 <h3>" . htmlspecialchars($row['nom_activitat']) . "</h3>
                 <p>Data Inici: " . htmlspecialchars($row['data_inici']) . "</p>
                 <p>Data Final: " . htmlspecialchars($row['data_fi']) . "</p>
-                <button class='btn'>Entregar</button>
-            <br><br><br><br>
+                <form method='POST' action=''>
+                    <input type='hidden' name='id_actividad' value='" . $row['id_activitat'] . "'>
+                    <button type='submit' name='entregar_actividad' class='btn'>Entregar</button>
+                    <br><br><br><br>
+                </form>
             </div>
+            
             ";
         }
     } else {

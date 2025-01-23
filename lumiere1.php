@@ -103,7 +103,7 @@ mysqli_close($connexio);
             }
             ?>
 
-            <input type="submit"></input>
+            <input type="submit" value="Enviar"></input>
         </form>
     </div>
 
