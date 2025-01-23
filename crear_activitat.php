@@ -6,6 +6,11 @@ $clau = "";
 $bbdd = "micro2";
 $connexio = mysqli_connect($servidor, $usuari, $clau, $bbdd);
 
+// Verificar conexión
+if (!$connexio) {
+    die("Error de connexió: " . mysqli_connect_error());
+}
+
 // Verificar la sesión del usuario
 session_start();
 $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay sesión, mostrar 'Desconocido'
@@ -13,42 +18,71 @@ $nombreProfesor = $_SESSION['nombre_profesor'] ?? 'Desconocido'; // Si no hay se
 // Mensaje para mostrar los resultados
 $mensaje = "";
 
-// Manejo de las acciones de las actividades
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Crear actividad
-if (isset($_POST['crear_activitat'])) {
-    $id_activitat = mysqli_real_escape_string($connexio, $_POST['id_activitat'] ?? '');
-    $nom_activitat = mysqli_real_escape_string($connexio, $_POST['nom_activitat'] ?? '');
-    $data_inici = mysqli_real_escape_string($connexio, $_POST['data_inici'] ?? '');
-    $data_fi = mysqli_real_escape_string($connexio, $_POST['data_fi'] ?? ''); // Asegúrate de usar 'data_fi' en lugar de 'data_final'
-    $id_projecte = 1; // El ID del proyecto siempre es 1
+// Validar si el profesor y el proyecto predeterminado existen
+$check_professor = "SELECT COUNT(*) AS total FROM professor WHERE id_professor = 1";
+$result_professor = mysqli_query($connexio, $check_professor);
+$row_professor = mysqli_fetch_assoc($result_professor);
 
-    if ($id_activitat && $nom_activitat && $data_inici && $data_fi) {
-        $sql = "INSERT INTO activitat (id_projecte, data_inici, data_fi, id_activitat, nom_activitat) 
-                VALUES ('$id_projecte', '$data_inici', '$data_fi', '$id_activitat', '$nom_activitat')";
-        
-        if (mysqli_query($connexio, $sql)) {
-            $mensaje = "Activitat creada amb èxit!";
-        } else {
-            $mensaje = "Error en crear l'activitat: " . mysqli_error($connexio);
-        }
-    } else {
-        $mensaje = "Tots els camps són obligatoris!";
+if ($row_professor['total'] == 0) {
+    // Crear un profesor predeterminado
+    $default_professor = "INSERT INTO professor (id_professor, nom_professor) VALUES (1, 'Professor Default')";
+    if (!mysqli_query($connexio, $default_professor)) {
+        die("Error al crear el professor predeterminat: " . mysqli_error($connexio));
     }
 }
 
+$check_projecte = "SELECT COUNT(*) AS total FROM projecte WHERE id_projecte = 1";
+$result_projecte = mysqli_query($connexio, $check_projecte);
+$row_projecte = mysqli_fetch_assoc($result_projecte);
+
+if ($row_projecte['total'] == 0) {
+    // Crear un proyecto predeterminado
+    $default_projecte = "INSERT INTO projecte (id_professor, data_inici, data_fi, id_projecte, nom_projecte) 
+                         VALUES (1, '2025-01-01', '2025-12-31', 1, 'Projecte Default')";
+    if (!mysqli_query($connexio, $default_projecte)) {
+        die("Error al crear el projecte predeterminat: " . mysqli_error($connexio));
+    }
+}
+
+// Manejo de las acciones de las actividades
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Crear actividad
+    if (isset($_POST['crear_activitat'])) {
+        $nom_activitat = mysqli_real_escape_string($connexio, $_POST['nom_activitat'] ?? '');
+        $id_activitat = mysqli_real_escape_string($connexio, $_POST['id_activitat'] ?? '');
+        $data_inici = mysqli_real_escape_string($connexio, $_POST['data_inici'] ?? '');
+        $data_fi = mysqli_real_escape_string($connexio, $_POST['data_fi'] ?? '');
+        $id_projecte = 1; // El ID del proyecto siempre es 1
+
+        if ($id_activitat && $nom_activitat && $data_inici && $data_fi) {
+            $sql = "INSERT INTO activitat (id_projecte, data_inici, data_fi, id_activitat, nom_activitat, estat_activitat) 
+                    VALUES ('$id_projecte', '$data_inici', '$data_fi', '$id_activitat', '$nom_activitat', 'no_entregat')";
+            
+            if (mysqli_query($connexio, $sql)) {
+                $mensaje = "Activitat creada amb èxit!";
+            } else {
+                $mensaje = "Error en crear l'activitat: " . mysqli_error($connexio);
+            }
+        } else {
+            $mensaje = "Tots els camps són obligatoris!";
+        }
+    }
+
     // Modificar actividad
     if (isset($_POST['modificar_activitat'])) {
-        $id_activitat = mysqli_real_escape_string($connexio, $_POST['id_activitat']);
         $nom_activitat = mysqli_real_escape_string($connexio, $_POST['nom_activitat']);
+        $id_activitat = mysqli_real_escape_string($connexio, $_POST['id_activitat']);
         $data_inici = mysqli_real_escape_string($connexio, $_POST['data_inici']);
-        $data_final = mysqli_real_escape_string($connexio, $_POST['data_final']);
+        $data_fi = mysqli_real_escape_string($connexio, $_POST['data_fi']);
+        $estat_activitat = mysqli_real_escape_string($connexio, $_POST['estat_activitat'] ?? 'no_entregat');
+        $id_projecte = 1;
 
         if ($id_activitat) {
             $sql = "UPDATE activitat SET 
                     nom_activitat = '$nom_activitat', 
                     data_inici = '$data_inici', 
-                    data_final = '$data_final' 
+                    data_fi = '$data_fi',
+                    estat_activitat = '$estat_activitat'
                     WHERE id_activitat = '$id_activitat'";
             if (mysqli_query($connexio, $sql)) {
                 $mensaje = "Activitat modificada amb èxit!";
@@ -103,8 +137,6 @@ if (isset($_POST['crear_activitat'])) {
         <h1>Gestió d'Activitats</h1>
     </div>
 
-    <br><br>
-
     <form class="crearactivitat" method="POST">
         <div class="form-container">
             <input type="text" name="nom_activitat" placeholder="Nom de l'Activitat" required>
@@ -113,7 +145,7 @@ if (isset($_POST['crear_activitat'])) {
             <br><br>
             <input type="datetime-local" name="data_inici" required>
             <br><br>
-            <input type="datetime-local" name="data_final" required>
+            <input type="datetime-local" name="data_fi" required>
             <br><br><br><br>
 
             <div class="form-buttons">
