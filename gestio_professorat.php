@@ -78,63 +78,76 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Manejo de items
-    if (isset($_POST['crear_item'])) {
-        $nom_item = mysqli_real_escape_string($connexio, $_POST['nom_item'] ?? '');
-        $tipus = mysqli_real_escape_string($connexio, $_POST['tipus'] ?? '');
-        $percentatge = mysqli_real_escape_string($connexio, $_POST['percentatge'] ?? '');
-        $id_activitat = mysqli_real_escape_string($connexio, $_POST['id_activitat'] ?? '');
+}
 
-        if ($nom_item && $tipus && $percentatge && $id_activitat) {
-            $sql = "INSERT INTO item (nom_item, tipus_item, percentatge, id_activitat) 
-                    VALUES ('$nom_item', '$tipus', '$percentatge', '$id_activitat')";
-            if (mysqli_query($connexio, $sql)) {
-                $mensaje = "Item creat amb èxit!";
+// Manejo del formulario para skills
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Crear skill
+    if (isset($_POST['crear_skill'])) {
+        $id_item = mysqli_real_escape_string($connexio, $_POST['id_item'] ?? '');
+        $nom_item = mysqli_real_escape_string($connexio, $_POST['nom_item'] ?? '');
+        $descripcio = mysqli_real_escape_string($connexio, $_POST['descripcio'] ?? '');
+        $id_activitat = mysqli_real_escape_string($connexio, $_POST['id_activitat'] ?? '');
+        $id_projecte = mysqli_real_escape_string($connexio, $_POST['id_projecte'] ?? '');
+
+        if ($nom_item && $id_activitat && $id_projecte) {
+            if ($id_item) {
+                // Si se proporciona un ID, lo utilizamos en la creación
+                $sql = "INSERT INTO skills (id_item, nom_item, descripcio, id_activitat, id_projecte) 
+                        VALUES ('$id_item', '$nom_item', '$descripcio', '$id_activitat', '$id_projecte')";
             } else {
-                $mensaje = "Error en crear l'item: " . mysqli_error($connexio);
+                // Si no se proporciona un ID, dejamos que la base de datos lo genere automáticamente
+                $sql = "INSERT INTO skills (nom_item, descripcio, id_activitat, id_projecte) 
+                        VALUES ('$nom_item', '$descripcio', '$id_activitat', '$id_projecte')";
+            }
+
+            if (mysqli_query($connexio, $sql)) {
+                $mensaje = "Skill creat amb èxit!";
+            } else {
+                $mensaje = "Error en crear el skill: " . mysqli_error($connexio);
             }
         } else {
-            $mensaje = "Tots els camps són obligatoris per crear un item!";
+            $mensaje = "Tots els camps són obligatoris per crear un skill!";
         }
     }
 
-    // Modificar item
-    if (isset($_POST['modificar_item'])) {
+    // Modificar skill
+    if (isset($_POST['modificar_skill'])) {
         $id_item = mysqli_real_escape_string($connexio, $_POST['id_item'] ?? '');
         $nom_item = mysqli_real_escape_string($connexio, $_POST['nom_item'] ?? '');
-        $tipus = mysqli_real_escape_string($connexio, $_POST['tipus'] ?? '');
-        $percentatge = mysqli_real_escape_string($connexio, $_POST['percentatge'] ?? '');
+        $descripcio = mysqli_real_escape_string($connexio, $_POST['descripcio'] ?? '');
         $id_activitat = mysqli_real_escape_string($connexio, $_POST['id_activitat'] ?? '');
+        $id_projecte = mysqli_real_escape_string($connexio, $_POST['id_projecte'] ?? '');
 
-        if ($id_item) {
-            $sql = "UPDATE item SET 
+        if ($id_item && ($nom_item || $descripcio || $id_activitat || $id_projecte)) {
+            $sql = "UPDATE skills SET 
                     nom_item = '$nom_item', 
-                    tipus_item = '$tipus', 
-                    percentatge = '$percentatge', 
-                    id_activitat = '$id_activitat' 
+                    descripcio = '$descripcio', 
+                    id_activitat = '$id_activitat', 
+                    id_projecte = '$id_projecte' 
                     WHERE id_item = '$id_item'";
             if (mysqli_query($connexio, $sql)) {
-                $mensaje = "Item modificat amb èxit!";
+                $mensaje = "Skill modificat amb èxit!";
             } else {
-                $mensaje = "Error en modificar l'item: " . mysqli_error($connexio);
+                $mensaje = "Error en modificar el skill: " . mysqli_error($connexio);
             }
         } else {
-            $mensaje = "Cal indicar l'ID de l'item per modificar!";
+            $mensaje = "Cal indicar l'ID del skill i almenys un camp per modificar!";
         }
     }
 
-    // Eliminar item
-    if (isset($_POST['eliminar_item'])) {
+    // Eliminar skill
+    if (isset($_POST['eliminar_skill'])) {
         $id_item = mysqli_real_escape_string($connexio, $_POST['id_item'] ?? '');
         if ($id_item) {
-            $sql = "DELETE FROM item WHERE id_item = '$id_item'";
+            $sql = "DELETE FROM skills WHERE id_item = '$id_item'";
             if (mysqli_query($connexio, $sql)) {
-                $mensaje = "Item eliminat amb èxit!";
+                $mensaje = "Skill eliminat amb èxit!";
             } else {
-                $mensaje = "Error en eliminar l'item: " . mysqli_error($connexio);
+                $mensaje = "Error en eliminar el skill: " . mysqli_error($connexio);
             }
         } else {
-            $mensaje = "Cal indicar l'ID de l'item per eliminar!";
+            $mensaje = "Cal indicar l'ID del skill per eliminar!";
         }
     }
 }
@@ -193,25 +206,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div>
             <h1>Items</h1>
             <br><br>
-            <form class="formgestioprofe" method="POST">
-                <input type="text" name="nom_item" placeholder="Nom de l'Item">
-                <br><br>
-                <label for="tipus">Tipus de l'Item:</label>
-                <br>
-                <input type="radio" id="soft-skills" name="tipus" value="Soft Skills">
-                <label for="soft-skills">Soft Skills</label>
-                <br>
-                <input type="radio" id="hard-skills" name="tipus" value="Hard Skills">
-                <label for="hard-skills">Hard Skills</label>
-                <br><br>
-                <input type="text" name="percentatge" placeholder="Percentatge">
-                <br><br>
-                <input type="text" name="id_activitat" placeholder="ID Activitat">
-                <br><br>
-                <button type="submit" class="botonform" name="crear_item">Crear Item</button>
-                <button type="submit" class="botonform" name="modificar_item">Modificar Item</button>
-                <button type="submit" class="botonform" name="eliminar_item">Eliminar Item</button>
-            </form>
+    <!-- Formulario para skills -->
+    <form method="POST">
+        <input type="text" name="id_item" placeholder="ID del Skill (Per Modificar o Eliminar)">
+        <br><br>
+        <input type="text" name="nom_item" placeholder="Nom del Skill">
+        <br><br>
+        <textarea name="descripcio" placeholder="Descripció"></textarea>
+        <br><br>
+        <input type="text" name="id_activitat" placeholder="ID de l'Activitat">
+        <br><br>
+        <input type="text" name="id_projecte" placeholder="ID del Projecte">
+        <br><br>
+        <button type="submit" name="crear_skill">Crear Skill</button>
+        <button type="submit" name="modificar_skill">Modificar Skill</button>
+        <button type="submit" name="eliminar_skill">Eliminar Skill</button>
+    </form>
         </div>
     </div>
 
