@@ -54,13 +54,13 @@ $nombreAlumno = $_SESSION['nombre_alumno'];
     <br>
 
     <!-- Menú de navegación -->
-    <div class="menu">
+    <!-- <div class="menu">
         <button class="menu-btn" onclick="window.location.href='nota_php.php'"> PHP </button>
         <button class="menu-btn" onclick="window.location.href='nota_js.php'"> Javascript </button>
         <button class="menu-btn" onclick="window.location.href='nota_disseny.php'"> Disseny </button>
         <button class="menu-btn" onclick="window.location.href='nota_empresa.php'"> Empresa </button>
         <button class="menu-btn" onclick="window.location.href='notes_projecte_alumne.php'"> Projecte </button>
-    </div>
+    </div> -->
 
     <script>
         // Función para ir a la página anterior
