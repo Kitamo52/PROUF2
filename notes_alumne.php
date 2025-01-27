@@ -25,7 +25,6 @@ $query = "SELECT avaluacio.id_avaluacio, avaluacio.puntuacio, activitat.nom_acti
           FROM avaluacio
           JOIN activitat ON avaluacio.id_activitat = activitat.id_activitat
           WHERE avaluacio.id_estudiant = $idEstudiant";
-          echo $query;
 // $stmt = $connexio->prepare($query);
 // $stmt->bind_param("i", $idEstudiant);
 // $stmt->execute();
@@ -71,17 +70,13 @@ $resultat = mysqli_query($connexio,$query);
             border-bottom: 1px solid #dddddd;
         }
 
-        .styled-table tbody tr:nth-of-type(even) {
-            background-color: #f3f3f3;
-        }
-
         .styled-table tbody tr:hover {
-            background-color: #f1c40f;
-            color: #ffffff;
+            background-color:rgb(110, 110, 110);
         }
 
         .styled-table td, .styled-table th {
             padding: 12px 15px;
+            text-align: center;
         }
     </style>
 </head>

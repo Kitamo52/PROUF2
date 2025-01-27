@@ -21,13 +21,83 @@ $resultat = mysqli_query($connexio, $sql);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notas de Estudiantes</title>
     <link rel="stylesheet" href="lumiere2profe.css">
+    <style>
+        /* Estilos específicos para la tabla de notas */
+        .styled-table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .styled-table thead {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        /* Alineación de la columna de puntuación hacia la derecha */
+        .styled-table td:nth-child(2) {
+            text-align: right;
+        }
+
+        /* Estilo para los inputs */
+        .nota-input {
+            width: 60px;
+            padding: 5px;
+            text-align: right;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Estilo para el botón de guardar */
+        .boton-guardar {
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .boton-guardar:hover {
+            background-color: #2980b9;
+        }
+
+        /* Filas alternas */
+        .styled-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .styled-table tbody tr:hover {
+            background-color:rgb(110, 110, 110);
+            color: white;
+        }
+
+        /* Contenedor de la tabla */
+        .tabla-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
