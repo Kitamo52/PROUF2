@@ -7,6 +7,7 @@ body {
     background-image: url(img/wallpaper1.jpg);
     background-size: cover; /* Asegura que la imagen de fondo cubra toda la pantalla */
     background-position: center; /* Centra la imagen de fondo */
+    background-repeat: no-repeat;
 }
 
 /* Barra de navegación y bienvenida */

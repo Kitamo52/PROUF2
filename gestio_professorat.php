@@ -77,7 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mensaje = "Cal indicar l'ID de l'estudiant per eliminar!";
         }
     }
-
 }
 
 // Manejo del formulario para skills
@@ -161,6 +160,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Panell d'Alumnes</title>
     <link rel="stylesheet" href="lumiere2profe.css">
     <link rel="icon" href="img/logo_lumiere-removebg-preview.png" type="image/x-icon">
+    <style>
+        /* Estilos para los formularios */
+
+        .columna {
+            margin-top: 20px;
+        }
+
+        .formgestioprofe {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .formgestioprofe input,
+        .formgestioprofe textarea {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .formgestioprofe button {
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .formgestioprofe button:hover {
+            background-color: #2980b9;
+        }
+
+        .formgestioprofe button + button {
+            margin-top: 10px;
+        }
+
+        .mensaje {
+            color: green;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .columna {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            color:rgb(255, 255, 255);
+        }
+    </style>
 </head>
 <body>
     <div class="header">
@@ -182,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h1>Estudiants</h1>
             <br><br>
             <?php if ($mensaje) : ?>
-                <p style="color: green;"><?php echo $mensaje; ?></p>
+                <p class="mensaje"><?php echo $mensaje; ?></p>
             <?php endif; ?>
             <form class="formgestioprofe" method="POST">
                 <input type="text" name="id_estudiant" placeholder="ID de l'Estudiant (Per Modificar o Eliminar)">
@@ -206,22 +264,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div>
             <h1>Items</h1>
             <br><br>
-    <!-- Formulario para skills -->
-    <form method="POST">
-        <input type="text" name="id_item" placeholder="ID del Skill (Per Modificar o Eliminar)">
-        <br><br>
-        <input type="text" name="nom_item" placeholder="Nom del Skill">
-        <br><br>
-        <textarea name="descripcio" placeholder="Descripció"></textarea>
-        <br><br>
-        <input type="text" name="id_activitat" placeholder="ID de l'Activitat">
-        <br><br>
-        <input type="text" name="id_projecte" placeholder="ID del Projecte">
-        <br><br>
-        <button type="submit" name="crear_skill">Crear Skill</button>
-        <button type="submit" name="modificar_skill">Modificar Skill</button>
-        <button type="submit" name="eliminar_skill">Eliminar Skill</button>
-    </form>
+            <form class="formgestioprofe" method="POST">
+                <input type="text" name="id_item" placeholder="ID del Skill (Per Modificar o Eliminar)">
+                <br><br>
+                <input type="text" name="nom_item" placeholder="Nom del Skill">
+                <br><br>
+                <textarea name="descripcio" placeholder="Descripció"></textarea>
+                <br><br>
+                <input type="text" name="id_activitat" placeholder="ID de l'Activitat">
+                <br><br>
+                <input type="text" name="id_projecte" placeholder="ID del Projecte">
+                <br><br>
+                <button type="submit" name="crear_skill">Crear Skill</button>
+                <button type="submit" name="modificar_skill">Modificar Skill</button>
+                <button type="submit" name="eliminar_skill">Eliminar Skill</button>
+            </form>
         </div>
     </div>
 

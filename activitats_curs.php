@@ -58,9 +58,11 @@ if (isset($_POST['entregar_actividad'])) {
     <h1 class="tituloassignatures">Activitats en Curs</h1>
 </div>
 
-<div class="imgprofe">
+<br><br><br><br>
+
+<!-- <div class="imgprofe">
     <img src="img/logo_lumiere-removebg-preview.png" alt="Logo Lumiere">
-</div>
+</div> -->
 
 <!-- Contenedor para las entregas -->
 <div class="entregas-container">
