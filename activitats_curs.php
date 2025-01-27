@@ -42,6 +42,83 @@ if (isset($_POST['entregar_actividad'])) {
     <title>Projecte</title>
     <link rel="stylesheet" href="lumiere2alumno.css">
     <link rel="icon" href="img/logo_lumiere-removebg-preview.png" type="image/x-icon">
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f9fc;
+        color: #2c3e50;
+        margin: 0;
+        padding: 0;
+    }
+
+    .title-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .title-container h1 {
+        font-size: 2em;
+        color:rgb(244, 244, 244);
+    }
+
+    .entregas-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco transparente */
+        width: 300px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h3 {
+        font-size: 1.5em;
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+
+    .card p {
+        font-size: 1em;
+        color: #7f8c8d;
+        margin-bottom: 20px;
+    }
+
+    .card button {
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .card button:hover {
+        background-color: #2980b9;
+    }
+
+    .no-activities {
+        font-size: 1.2em;
+        color: #7f8c8d;
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+
 </head>
 <body>
 <div class="header">
@@ -58,12 +135,6 @@ if (isset($_POST['entregar_actividad'])) {
     <h1 class="tituloassignatures">Activitats en Curs</h1>
 </div>
 
-<br><br><br><br>
-
-<!-- <div class="imgprofe">
-    <img src="img/logo_lumiere-removebg-preview.png" alt="Logo Lumiere">
-</div> -->
-
 <!-- Contenedor para las entregas -->
 <div class="entregas-container">
     <?php
@@ -79,11 +150,9 @@ if (isset($_POST['entregar_actividad'])) {
                 <p>Data Final: " . htmlspecialchars($row['data_fi']) . "</p>
                 <form method='POST' action=''>
                     <input type='hidden' name='id_actividad' value='" . $row['id_activitat'] . "'>
-                    <button type='submit' name='entregar_actividad' class='btn'>Entregar</button>
-                    <br><br><br><br>
+                    <button type='submit' name='entregar_actividad'>Entregar</button>
                 </form>
             </div>
-            
             ";
         }
     } else {

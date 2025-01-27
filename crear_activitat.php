@@ -120,6 +120,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Panell d'Activitats</title>
     <link rel="stylesheet" href="lumiere2profe.css">
     <link rel="icon" href="img/logo_lumiere-removebg-preview.png" type="image/x-icon">
+    <style>
+        h1{
+            text-align: center;
+        }
+        /* Estilos aplicados exclusivamente al formulario con la clase crearactivitat */
+        .crearactivitat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .crearactivitat input[type="text"],
+        .crearactivitat input[type="datetime-local"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .crearactivitat input[type="text"]:focus,
+        .crearactivitat input[type="datetime-local"]:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+            outline: none;
+        }
+
+        .crearactivitat .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .crearactivitat .botonform {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .crearactivitat .botonform:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
 
 <body>
