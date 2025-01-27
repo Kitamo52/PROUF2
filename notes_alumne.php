@@ -9,14 +9,28 @@ $connexio = mysqli_connect($servidor, $usuari, $clau, $bbdd);
 // Iniciar sesión
 session_start();
 
-// Verificar si el nombre del alumno está disponible en la sesión
-if (!isset($_SESSION['nombre_alumno'])) {
-    // Si la sesión no tiene el nombre del alumno, redirigir al inicio de sesión o asignar un valor por defecto
-    $_SESSION['nombre_alumno'] = 'Desconocido'; // O podrías redirigir a una página de inicio
+// Verificar si el nombre y el id del alumno están disponibles en la sesión
+if (!isset($_SESSION['nombre_alumno']) || !isset($_SESSION['id_estudiant'])) {
+    // Si no están disponibles, redirigir al inicio de sesión o asignar valores por defecto
+    $_SESSION['nombre_alumno'] = 'Desconocido';
+    //$_SESSION['id_estudiant'] = 0; // ID por defecto
 }
 
-// Asignar el nombre del alumno
+// Asignar variables de sesión
 $nombreAlumno = $_SESSION['nombre_alumno'];
+$idEstudiant = $_SESSION['id_estudiant'];
+
+// Consulta para obtener las notas del estudiante
+$query = "SELECT avaluacio.id_avaluacio, avaluacio.puntuacio, activitat.nom_activitat
+          FROM avaluacio
+          JOIN activitat ON avaluacio.id_activitat = activitat.id_activitat
+          WHERE avaluacio.id_estudiant = $idEstudiant";
+          echo $query;
+// $stmt = $connexio->prepare($query);
+// $stmt->bind_param("i", $idEstudiant);
+// $stmt->execute();
+// $resultat = $stmt->get_result();
+$resultat = mysqli_query($connexio,$query);
 ?>
 
 <!DOCTYPE html>
@@ -28,12 +42,54 @@ $nombreAlumno = $_SESSION['nombre_alumno'];
     <title> Notes de Alumne </title>
     <link rel="stylesheet" href="lumiere2alumno.css">
     <link rel="icon" href="img/logo_lumiere-removebg-preview.png" type="image/x-icon">
+    <style>
+        .table-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .styled-table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 18px;
+            font-family: Arial, sans-serif;
+            text-align: left;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .styled-table thead tr {
+            background-color: #2c3e50;
+            color: #ffffff;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: #f1c40f;
+            color: #ffffff;
+        }
+
+        .styled-table td, .styled-table th {
+            padding: 12px 15px;
+        }
+    </style>
 </head>
 
 <body>
     <div class="header">
         <div class="welcome-message">
-            <p>Bienvenido, <?php echo $nombreAlumno; ?></p>
+            <p>Bienvenido, <?php echo htmlspecialchars($nombreAlumno); ?></p>
         </div>
         <div class="logout-button">
             <img src="img/arrow-left.png" alt="Atrás" class="back-button" onclick="goBack()">
@@ -45,22 +101,26 @@ $nombreAlumno = $_SESSION['nombre_alumno'];
         <h1 class="tituloassignatures"> Notes del Alumne </h1>
     </div>
 
-    <br><br>
-
-    <div class="imgprofe">
-        <img src="img/logo_lumiere-removebg-preview.png" alt="">
+    <div class="table-container">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>ID Avaluació</th>
+                    <th>Nom Activitat</th>
+                    <th>Puntuació</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($fila = $resultat->fetch_assoc()): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($fila['id_avaluacio']); ?></td>
+                        <td><?php echo htmlspecialchars($fila['nom_activitat']); ?></td>
+                        <td><?php echo htmlspecialchars($fila['puntuacio']); ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
     </div>
-
-    <br>
-
-    <!-- Menú de navegación -->
-    <!-- <div class="menu">
-        <button class="menu-btn" onclick="window.location.href='nota_php.php'"> PHP </button>
-        <button class="menu-btn" onclick="window.location.href='nota_js.php'"> Javascript </button>
-        <button class="menu-btn" onclick="window.location.href='nota_disseny.php'"> Disseny </button>
-        <button class="menu-btn" onclick="window.location.href='nota_empresa.php'"> Empresa </button>
-        <button class="menu-btn" onclick="window.location.href='notes_projecte_alumne.php'"> Projecte </button>
-    </div> -->
 
     <script>
         // Función para ir a la página anterior
@@ -68,5 +128,5 @@ $nombreAlumno = $_SESSION['nombre_alumno'];
             window.history.back();
         }
     </script>
-
 </body>
+</html>

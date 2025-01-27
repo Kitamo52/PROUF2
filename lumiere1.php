@@ -26,9 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mysqli_num_rows($resultEstudiant) > 0) {
         // Iniciar sesión
         session_start();
+        $fila = mysqli_fetch_assoc($resultEstudiant);
 
         // Guardar el nombre del estudiante en la sesión
-        $_SESSION['nombre_alumno'] = $usuario;
+        $_SESSION['nombre_alumno'] = $fila["nom_estudiant"];
+        $_SESSION['id_estudiant'] = $fila["id_estudiant"];
+
 
         // Redirigir al panel de alumnos
         header("Location: lumiere2alumno.php");
